@@ -15,4 +15,4 @@ bin/glarea-functions.o: src/glarea-functions.c
 	$(CC) $(CCFLAGS) -c src/glarea-functions.c -o bin/glarea-functions.o
 
 clean:
-	rm -r $(NAME) bin
+	rm $(NAME) bin/*

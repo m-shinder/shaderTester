@@ -59,8 +59,6 @@ void main()
             <property name="app_paintable">True</property>
             <property name="can_focus">False</property>
             <property name="has_alpha">True</property>
-            <signal name="realize" handler="on_glarea_realize" swapped="no"/>
-            <signal name="render" handler="on_glarea_render" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -307,11 +305,13 @@ void main()
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkCheckButton" id="magBilinearCheckbox">
-                            <property name="label" translatable="yes">Mag Linear</property>
+                            <property name="label" translatable="yes">Mag Bilinear</property>
+                            <property name="name">magB</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="on_optionsCheckbox_toggled" object="recompileButton" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -322,11 +322,13 @@ void main()
                         <child>
                           <object class="GtkCheckButton" id="minBilinearCheckbox">
                             <property name="label" translatable="yes">Min Bilinear</property>
+                            <property name="name">minB</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="margin_right">45</property>
                             <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="on_optionsCheckbox_toggled" object="recompileButton" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
