@@ -311,7 +311,6 @@ void main()
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="draw_indicator">True</property>
-                            <signal name="toggled" handler="on_optionsCheckbox_toggled" object="recompileButton" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -328,7 +327,6 @@ void main()
                             <property name="receives_default">False</property>
                             <property name="margin_right">45</property>
                             <property name="draw_indicator">True</property>
-                            <signal name="toggled" handler="on_optionsCheckbox_toggled" object="recompileButton" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>

@@ -5,17 +5,15 @@ void on_mainWindow_destroy()
 	gtk_main_quit();
 }
 
-void on_optionsCheckbox_toggled(GtkWidget* checkbox, GtkWidget* formHandler)
+void on_optionsCheckbox_toggled(GtkWidget* checkbox, RenderOptions* renderOptions)
 {
-	g_object_set_data (
-			G_OBJECT(formHandler),
-			gtk_widget_get_name(GTK_WIDGET(checkbox)),
-			gtk_toggle_button_get_active(checkbox)
-			);
+	if(g_strcmp0(gtk_widget_get_name(checkbox), "magB" ) == 0 )
+		renderOptions->minBilinear = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbox));
+	if(g_strcmp0(gtk_widget_get_name(checkbox), "minB" ) == 0 )
+		renderOptions->minBilinear = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbox));
 }
 
-void on_recompileButton_clicked(GtkWidget* button, RenderData renderData)
+void on_recompileButton_clicked(GtkWidget* button, void* optionsAndData)
 {
-	g_print("%d\n", g_object_get_data(button, "magB"));
-	g_print("%d\n", g_object_get_data(button, "minB"));
+	return;
 }

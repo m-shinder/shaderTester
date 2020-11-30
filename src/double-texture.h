@@ -7,11 +7,23 @@ typedef struct	render_data_struct
 	int			VBO;
 	int			EBO;
 	int			shaderProgram;
+	int			firstTexture;
+	int			secondTexture;
 }				RenderData;
 
+typedef struct	render_options_struct
+{
+	gboolean	magBilinear;
+	gboolean	minBilinear;
+	char*		vertexShaderSource;
+	char*		fragmentShaderSource;
+
+}				RenderOptions;
+
 gboolean on_glarea_render(GtkGLArea* area, GdkGLContext* context, RenderData* renderData);
+int connect_all_signals(GtkBuilder* builder);
 void on_glarea_realize(GtkGLArea* area, RenderData* renderData);
 void on_mainWindow_destroy();
-void on_optionsCheckbox_toggled(GtkWidget* checkbox, GtkWidget* formHandler);
-void on_recompileButton_clicked(GtkWidget* button, RenderData renderData);
+void on_optionsCheckbox_toggled(GtkWidget* checkbox, RenderOptions* renderOptions);
+void on_recompileButton_clicked(GtkWidget* button, void* optionsAndData);
 #endif
