@@ -17,6 +17,8 @@ typedef struct	render_options_struct
 	gboolean	minBilinear;
 	char*		vertexShaderSource;
 	char*		fragmentShaderSource;
+	char*		firstTexturePath;
+	char*		secondTexturePath;
 
 }				RenderOptions;
 
@@ -26,4 +28,5 @@ void on_glarea_realize(GtkGLArea* area, RenderData* renderData);
 void on_mainWindow_destroy();
 void on_optionsCheckbox_toggled(GtkWidget* checkbox, RenderOptions* renderOptions);
 void on_recompileButton_clicked(GtkWidget* button, void* optionsAndData);
+void on_texture_fileset(GtkWidget* filechooser, RenderOptions* renderOptions);
 #endif
