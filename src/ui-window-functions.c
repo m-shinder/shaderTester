@@ -21,7 +21,13 @@ void on_recompileButton_clicked(GtkWidget* button, void* optionsAndData)
 void on_texture_fileset(GtkWidget* filechooser, RenderOptions* renderOptions)
 {
 	if(g_strcmp0(gtk_widget_get_name(filechooser), "firstT" ) == 0 )
+	{
+		g_free(renderOptions->firstTexturePath);
 		renderOptions->firstTexturePath = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(filechooser) );
+	}
 	if(g_strcmp0(gtk_widget_get_name(filechooser), "secondT" ) == 0 )
+	{
+		g_free(renderOptions->secondTexturePath);
 		renderOptions->secondTexturePath = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(filechooser) );
+	}
 }
