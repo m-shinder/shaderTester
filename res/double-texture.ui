@@ -3,13 +3,43 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkTextBuffer" id="FragmentShaderSourceBuffer">
-    <property name="text" translatable="yes">// example for fragment shader</property>
+    <property name="text" translatable="yes">// example for fragment shader
+#version 330 core
+out vec4 FragColor;
+in vec3 ourColor;
+in vec2 TexCoord;
+uniform sampler2D Texture1;
+uniform sampler2D Texture2;
+void main()
+{
+//	FragColor = texture(ourTexture, TexCoord) * vec4(ourColor, 1.0);
+//	FragColor = mix(texture(Texture1, TexCoord), texture(Texture2, TexCoord), 0.5);
+FragColor = mix(texture(Texture1, TexCoord), texture(Texture2, TexCoord), 0.2) * vec4(ourColor, 0.5);
+//	FragColor = texture(Texture1, TexCoord) * texture(Texture2, TexCoord);
+//	FragColor = texture(Texture1, TexCoord) * texture(Texture2, TexCoord) * vec4(ourColor, 1.0);
+//	FragColor = vec4(ourColor, 1.0f);
+//	FragColor = vec4(1.0f, 1.0f, 1.0f, 0.0f);
+};</property>
   </object>
   <object class="GtkTextBuffer" id="VertexShaderSourceBuffer">
-    <property name="text" translatable="yes">// example for vertex shader</property>
+    <property name="text" translatable="yes">// example for vertex shader
+#version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aColor;
+layout (location = 2) in vec2 aTexCoord;
+out vec3 ourColor;
+out vec2 TexCoord;
+uniform float xOffset;
+void main()
+{
+	gl_Position = vec4(aPos.x+xOffset, aPos.y, aPos.z, 1.0);
+	ourColor = aColor;
+	TexCoord = aTexCoord;
+};</property>
   </object>
-  <object class="GtkWindow">
+  <object class="GtkWindow" id="doubleTextureWindow">
     <property name="can_focus">False</property>
+    <signal name="destroy" handler="on_mainWindow_destroy" swapped="no"/>
     <child type="titlebar">
       <placeholder/>
     </child>
@@ -29,6 +59,7 @@
             <property name="app_paintable">True</property>
             <property name="can_focus">False</property>
             <property name="has_alpha">True</property>
+            <signal name="realize" handler="on_glarea_realize" swapped="no"/>
             <signal name="render" handler="on_glarea_render" swapped="no"/>
           </object>
           <packing>
@@ -78,6 +109,7 @@
                           <object class="GtkTextView" id="vertexShaderSourcerBuffer">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="buffer">VertexShaderSourceBuffer</property>
                             <property name="monospace">True</property>
                           </object>
                         </child>
@@ -121,6 +153,7 @@
                           <object class="GtkTextView" id="fragmentShaderSourceBuffe">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="buffer">FragmentShaderSourceBuffer</property>
                             <property name="monospace">True</property>
                           </object>
                         </child>
@@ -274,7 +307,7 @@
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkCheckButton" id="magBilinearCheckbox">
-                            <property name="label" translatable="yes">Mag Bilinear</property>
+                            <property name="label" translatable="yes">Mag Linear</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
