@@ -2,7 +2,9 @@ CC = gcc
 NAME = shaderTester
 CCFLAGS = `pkg-config --cflags gtk+-3.0 --libs epoxy` -rdynamic
 
-all: bin/main.o bin/glarea-functions.o bin/ui-window-functions.o
+all: build
+
+build: bin/main.o bin/glarea-functions.o bin/ui-window-functions.o
 	$(CC) bin/*.o -o $(NAME) $(CCFLAGS) 
 
 bin/main.o: src/main.c
@@ -16,3 +18,6 @@ bin/glarea-functions.o: src/glarea-functions.c
 
 clean:
 	rm $(NAME) bin/*
+
+run: build
+	./$(NAME)
