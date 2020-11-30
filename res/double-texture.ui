@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkTextBuffer" id="FragmentShaderSourceBuffer">
+  <object class="GtkTextBuffer" id="fragmentShaderSourceBuffer">
     <property name="text" translatable="yes">// example for fragment shader
 #version 330 core
 out vec4 FragColor;
@@ -21,7 +21,7 @@ FragColor = mix(texture(Texture1, TexCoord), texture(Texture2, TexCoord), 0.2) *
 //	FragColor = vec4(1.0f, 1.0f, 1.0f, 0.0f);
 };</property>
   </object>
-  <object class="GtkTextBuffer" id="VertexShaderSourceBuffer">
+  <object class="GtkTextBuffer" id="vertexShaderSourceBuffer">
     <property name="text" translatable="yes">// example for vertex shader
 #version 330 core
 layout (location = 0) in vec3 aPos;
@@ -107,7 +107,7 @@ void main()
                           <object class="GtkTextView" id="vertexShaderSourcerBuffer">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="buffer">VertexShaderSourceBuffer</property>
+                            <property name="buffer">vertexShaderSourceBuffer</property>
                             <property name="monospace">True</property>
                           </object>
                         </child>
@@ -151,7 +151,7 @@ void main()
                           <object class="GtkTextView" id="fragmentShaderSourceBuffe">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="buffer">FragmentShaderSourceBuffer</property>
+                            <property name="buffer">fragmentShaderSourceBuffer</property>
                             <property name="monospace">True</property>
                           </object>
                         </child>

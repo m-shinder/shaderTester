@@ -31,3 +31,23 @@ void on_texture_fileset(GtkWidget* filechooser, RenderOptions* renderOptions)
 		renderOptions->secondTexturePath = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(filechooser) );
 	}
 }
+
+void on_vertexSSB_changed(GtkTextBuffer* buffer, RenderOptions *renderOptions)
+{
+	GtkTextIter start, end;
+	g_free(renderOptions->vertexShaderSource);
+	gtk_text_buffer_get_iter_at_offset(buffer, &start, 0);
+	gtk_text_buffer_get_iter_at_offset(buffer, &end, -1);
+	renderOptions->vertexShaderSource = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
+	//g_print(renderOptions->vertexShaderSource);
+}
+
+void on_fragmentSSB_changed(GtkTextBuffer* buffer, RenderOptions *renderOptions)
+{
+	GtkTextIter start, end;
+	g_free(renderOptions->fragmentShaderSource);
+	gtk_text_buffer_get_iter_at_offset(buffer, &start, 0);
+	gtk_text_buffer_get_iter_at_offset(buffer, &end, -1);
+	renderOptions->fragmentShaderSource = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
+	//g_print(renderOptions->fragmentShaderSource);
+}

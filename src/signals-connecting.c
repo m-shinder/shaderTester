@@ -45,6 +45,20 @@ int connect_form_signals(GtkBuilder* builder, RenderOptions* renderOptions)
 		G_CALLBACK(on_texture_fileset),
 		renderOptions
 	);
+
+	g_signal_connect(
+		G_OBJECT(gtk_builder_get_object(builder, "vertexShaderSourceBuffer") ),
+		"changed",
+		G_CALLBACK(on_vertexSSB_changed),
+		renderOptions
+	);
+
+	g_signal_connect(
+		G_OBJECT(gtk_builder_get_object(builder, "fragmentShaderSourceBuffer") ),
+		"changed",
+		G_CALLBACK(on_fragmentSSB_changed),
+		renderOptions
+	);
 }
 
 int connect_all_signals(GtkBuilder* builder)

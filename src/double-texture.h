@@ -29,4 +29,6 @@ void on_mainWindow_destroy();
 void on_optionsCheckbox_toggled(GtkWidget* checkbox, RenderOptions* renderOptions);
 void on_recompileButton_clicked(GtkWidget* button, void* optionsAndData);
 void on_texture_fileset(GtkWidget* filechooser, RenderOptions* renderOptions);
+void on_vertexSSB_changed(GtkTextBuffer* buffer, RenderOptions *renderOptions);
+void on_fragmentSSB_changed(GtkTextBuffer* buffer, RenderOptions *renderOptions);
 #endif
