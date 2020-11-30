@@ -9,8 +9,9 @@ typedef struct	render_data_struct
 	int			shaderProgram;
 }				RenderData;
 
+gboolean on_glarea_render(GtkGLArea* area, GdkGLContext* context, RenderData* renderData);
 void on_glarea_realize(GtkGLArea* area, RenderData* renderData);
-void on_optionsCheckbox_toggled(GtkWidget* checkbox, GtkWidget* formHandler);
 void on_mainWindow_destroy();
+void on_optionsCheckbox_toggled(GtkWidget* checkbox, GtkWidget* formHandler);
 void on_recompileButton_clicked(GtkWidget* button, RenderData renderData);
 #endif

@@ -4,6 +4,12 @@
 int connect_signals(GtkBuilder* builder)
 {
 	g_signal_connect(
+		GTK_WIDGET(gtk_builder_get_object(builder, "glarea") ),
+		"render",
+		G_CALLBACK(on_glarea_render),
+		NULL
+	);
+	g_signal_connect(
 		GTK_WIDGET(gtk_builder_get_object(builder, "recompileButton") ),
 		"clicked",
 		G_CALLBACK(on_recompileButton_clicked),
