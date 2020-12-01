@@ -68,6 +68,7 @@ int load_texture(char* filename, int* texture)
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	stbi_image_free(data);
+	g_print("%s loaded to %d\n", filename, texture);
 }
 
 int buildShaderProgram(const char* vSS, const char* fSS)
@@ -119,19 +120,19 @@ gboolean on_glarea_render(GtkGLArea* area, GdkGLContext* context, RenderData* re
 	renderData->area = area;
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
-	printf("glerr0 %d\n",glGetError());
 
 	glUseProgram(renderData->shaderProgram);
+	printf("glerr0 %d\n",glGetError());
 	//printf("glerrM %d\n",glGetError());
 	//glUniform1f(glGetUniformLocation(renderData->shaderProgram, "xOffset"), 0.0f);
 	//printf("glerrm %d\n",glGetError());
 	glActiveTexture(GL_TEXTURE0);
 	printf("glerr1 %d\n",glGetError());
 	glBindTexture(GL_TEXTURE_2D, renderData->firstTexture);
-	printf("glerr2 %d\n",glGetError());
+	g_print("set texture 0 %d\n", renderData->firstTexture);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, renderData->secondTexture);
-	printf("glerr3 %d\n",glGetError());
+	g_print("set texture 1 %d\n", renderData->secondTexture);
 	glBindVertexArray(renderData->VAO);
 	printf("glerr4 %d\n",glGetError());
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderData->EBO);
@@ -161,6 +162,6 @@ void on_recompileButton_clicked(GtkWidget* button, void** optionsAndData)
 	data->shaderProgram = buildShaderProgram(options->vertexShaderSource, options->fragmentShaderSource);
 	setVertices(options, data);
 	gtk_gl_area_queue_render(((RenderData*)(optionsAndData[1]))->area);
-	g_print("%s\n======%s\n",options->vertexShaderSource, options->fragmentShaderSource);
+	//g_print("%s\n======%s\n",options->vertexShaderSource, options->fragmentShaderSource);
 }
 
