@@ -68,6 +68,7 @@ int connect_all_signals(GtkBuilder* builder)
 	renderOptionsAndData[0] = g_malloc(sizeof(RenderOptions));
 	renderOptionsAndData[1] = g_malloc(sizeof(RenderData));
 
+	((RenderData*)(renderOptionsAndData[1]))->area = GTK_GL_AREA(gtk_builder_get_object(builder, "glarea") );
 	//it acually set every char* to NULL. Important side effect
 	connect_form_signals(builder, renderOptionsAndData[0]);
 

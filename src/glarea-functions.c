@@ -116,6 +116,7 @@ void on_glarea_realize(GtkGLArea* area, RenderData* renderData)
 
 gboolean on_glarea_render(GtkGLArea* area, GdkGLContext* context, RenderData* renderData)
 {
+	renderData->area = area;
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	printf("glerr0 %d\n",glGetError());
@@ -152,11 +153,14 @@ void on_recompileButton_clicked(GtkWidget* button, void** optionsAndData)
 
 	options = optionsAndData[0];
 	data = optionsAndData[1];
+	gtk_gl_area_make_current(data->area);
+
 	load_texture(options->firstTexturePath, &(data->firstTexture));
 	load_texture(options->secondTexturePath, &(data->secondTexture));
 
 	data->shaderProgram = buildShaderProgram(options->vertexShaderSource, options->fragmentShaderSource);
 	setVertices(options, data);
+	gtk_gl_area_queue_render(((RenderData*)(optionsAndData[1]))->area);
 	g_print("%s\n======%s\n",options->vertexShaderSource, options->fragmentShaderSource);
 }
 

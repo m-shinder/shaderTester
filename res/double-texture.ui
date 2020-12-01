@@ -59,6 +59,7 @@ void main()
             <property name="app_paintable">True</property>
             <property name="can_focus">False</property>
             <property name="has_alpha">True</property>
+            <property name="auto_render">False</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -74,13 +75,9 @@ void main()
             <property name="spacing">5</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkBox">
+              <object class="GtkPaned">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="spacing">5</property>
-                <property name="homogeneous">True</property>
+                <property name="can_focus">True</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
@@ -120,9 +117,8 @@ void main()
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
+                    <property name="resize">False</property>
+                    <property name="shrink">True</property>
                   </packing>
                 </child>
                 <child>
@@ -164,9 +160,8 @@ void main()
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="resize">True</property>
+                    <property name="shrink">True</property>
                   </packing>
                 </child>
               </object>

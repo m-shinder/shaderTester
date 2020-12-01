@@ -3,12 +3,13 @@
 #define __DOUBLE_TEXTURE_H
 typedef struct	render_data_struct
 {
-	int			VAO;
-	int			VBO;
-	int			EBO;
-	int			shaderProgram;
-	int			firstTexture;
-	int			secondTexture;
+	int				VAO;
+	int				VBO;
+	int				EBO;
+	int				shaderProgram;
+	int				firstTexture;
+	int				secondTexture;
+	GtkGLArea		*area;
 }				RenderData;
 
 typedef struct	render_options_struct
