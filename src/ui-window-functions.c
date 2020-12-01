@@ -13,11 +13,6 @@ void on_optionsCheckbox_toggled(GtkWidget* checkbox, RenderOptions* renderOption
 		renderOptions->minBilinear = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbox) );
 }
 
-void on_recompileButton_clicked(GtkWidget* button, void* optionsAndData)
-{
-	return;
-}
-
 void on_texture_fileset(GtkWidget* filechooser, RenderOptions* renderOptions)
 {
 	if(g_strcmp0(gtk_widget_get_name(filechooser), "firstT" ) == 0 )

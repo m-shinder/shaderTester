@@ -1,6 +1,6 @@
 CC = gcc
 NAME = shaderTester
-CCFLAGS = `pkg-config --cflags gtk+-3.0 --libs epoxy` -rdynamic
+CCFLAGS = `pkg-config --cflags gtk+-3.0 --libs epoxy` -rdynamic -lm
 
 all: build
 

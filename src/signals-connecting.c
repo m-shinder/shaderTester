@@ -40,7 +40,7 @@ int connect_form_signals(GtkBuilder* builder, RenderOptions* renderOptions)
 	);
 
 	g_signal_connect(
-		GTK_WIDGET(gtk_builder_get_object(builder, "firstTextureFileChooser") ),
+		GTK_WIDGET(gtk_builder_get_object(builder, "secondTextureFileChooser") ),
 		"file-set",
 		G_CALLBACK(on_texture_fileset),
 		renderOptions
