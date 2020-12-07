@@ -18,7 +18,6 @@ int setVertices(RenderOptions* options, RenderData* data)
 		0, 1, 2,
 		2, 3, 0
 	};
-	printf("glerrV %d\n",glGetError());
 	glGenVertexArrays(1, &(data->VAO));
 	glBindVertexArray(data->VAO);
 
@@ -51,14 +50,12 @@ int setVertices(RenderOptions* options, RenderData* data)
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-	printf("glerrVE %d\n",glGetError());
 
 }
 
 int load_texture(char* filename, int* texture)
 {
 	int width, height, nrChannels;
-	g_print("t  %s\n", filename);
 	unsigned char* data = stbi_load(filename, &width, &height, &nrChannels, 0);
 	glGenTextures(1, texture);
 	glBindTexture(GL_TEXTURE_2D, *texture);
@@ -68,7 +65,6 @@ int load_texture(char* filename, int* texture)
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	stbi_image_free(data);
-	g_print("%s loaded to %d\n", filename, texture);
 }
 
 int buildShaderProgram(const char* vSS, const char* fSS)
@@ -122,27 +118,18 @@ gboolean on_glarea_render(GtkGLArea* area, GdkGLContext* context, RenderData* re
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glUseProgram(renderData->shaderProgram);
-	printf("glerr0 %d\n",glGetError());
-	//printf("glerrM %d\n",glGetError());
-	//glUniform1f(glGetUniformLocation(renderData->shaderProgram, "xOffset"), 0.0f);
-	//printf("glerrm %d\n",glGetError());
+	glUniform1f(glGetUniformLocation(renderData->shaderProgram, "xOffset"), 0.0f);
 	glActiveTexture(GL_TEXTURE0);
-	printf("glerr1 %d\n",glGetError());
 	glBindTexture(GL_TEXTURE_2D, renderData->firstTexture);
-	g_print("set texture 0 %d\n", renderData->firstTexture);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, renderData->secondTexture);
-	g_print("set texture 1 %d\n", renderData->secondTexture);
 	glBindVertexArray(renderData->VAO);
-	printf("glerr4 %d\n",glGetError());
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderData->EBO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 	glUseProgram(0);
 	glFlush();
 
-	printf("glerr5 %d\n",glGetError());
-	g_print("render flushed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111\n");
 
 	return FALSE;
 }
@@ -156,12 +143,13 @@ void on_recompileButton_clicked(GtkWidget* button, void** optionsAndData)
 	data = optionsAndData[1];
 	gtk_gl_area_make_current(data->area);
 
+	stbi_set_flip_vertically_on_load(true);  
 	load_texture(options->firstTexturePath, &(data->firstTexture));
 	load_texture(options->secondTexturePath, &(data->secondTexture));
 
 	data->shaderProgram = buildShaderProgram(options->vertexShaderSource, options->fragmentShaderSource);
+	glUseProgram(data->shaderProgram);
 	setVertices(options, data);
 	gtk_gl_area_queue_render(((RenderData*)(optionsAndData[1]))->area);
-	//g_print("%s\n======%s\n",options->vertexShaderSource, options->fragmentShaderSource);
 }
 
