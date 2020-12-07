@@ -1,0 +1,8 @@
+# simple program to test GLSL shaders with multisampling
+
+## usage
+make run  (will build&run)
+write shaders in top right
+! you have 'update' both text-inputs to GTK handle shader source
+
+click 'Compile shaders'
